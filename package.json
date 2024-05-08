@@ -4,7 +4,7 @@
   "description": "A github action for https://github.com/nerdneilsfield/simple-telegram-notification-bot",
   "main": "src/index.ts",
   "scripts": {
-    "build": "ncc build",
+    "build": "ncc build --minify",
     "fmt": "prettier --write \"src/**/*.ts\"",
     "clean": "rm -rf dist/*",
     "fmtcheck": "prettier --check \"src/**/*.ts\"",
