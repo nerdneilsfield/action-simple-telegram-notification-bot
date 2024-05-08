@@ -39,7 +39,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Send Notification
-        uses: dengqi/action-simple-telegram-notification-bot@v1
+        uses: nerdneilsfield/action-simple-telegram-notification-bot@v1
         with:
           text: "Your push has been processed successfully!"
           files: "./build/output.zip"
