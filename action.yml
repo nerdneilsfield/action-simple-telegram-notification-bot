@@ -1,0 +1,24 @@
+# https://help.github.com/en/articles/metadata-syntax-for-github-actions
+name: "Action for notification for telegram"
+description: "Github Action for nerdneilsfield/simple-telegram-notification-bot"
+author: "dengqi"
+inputs:
+  text:
+    description: "Text to send to the bot"
+    required: false
+  files:
+    description: "File path to send to the bot"
+    required: false
+  push_success:
+    description: "Send notification when push success"
+    required: false
+    default: "true"
+env:
+  "BOT_URL": "your bot's URL"
+  "BOT_TOKEN": "your bot's token"
+runs:
+  using: "node20"
+  main: "dist/index.js"
+branding:
+  color: "green"
+  icon: "mail"

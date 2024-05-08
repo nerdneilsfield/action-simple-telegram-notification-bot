@@ -1,0 +1,45 @@
+{
+  "name": "action-simple-telegram-notification-bot",
+  "version": "1.0.0",
+  "description": "A github action for https://github.com/nerdneilsfield/simple-telegram-notification-bot",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "ncc build --minify",
+    "fmt": "prettier --write \"src/**/*.ts\"",
+    "clean": "rm -rf dist/*",
+    "fmtcheck": "prettier --check \"src/**/*.ts\"",
+    "lint": "eslint --ext .ts src",
+    "updatetag": "git tag -d v1 && git push origin :v1 && git tag -a v1 -m '' && git push origin v2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nerdneilsfield/action-simple-telegram-notification-bot.git"
+  },
+  "keywords": [
+    "GitHubAction",
+    "actions"
+  ],
+  "author": "dengqi <dengqi935@gmail.com>",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/nerdneilsfield/action-simple-telegram-notification-bot/issues"
+  },
+  "homepage": "https://github.com/nerdneilsfield/action-simple-telegram-notification-bot#readme",
+  "devDependencies": {
+    "@types/node": "^20.12.10",
+    "@types/url-join": "^4.0.3",
+    "@typescript-eslint/eslint-plugin": "^7.8.0",
+    "@typescript-eslint/parser": "^7.8.0",
+    "@vercel/ncc": "^0.38.1",
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.5",
+    "typescript-formatter": "^7.2.2"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0",
+    "axios": "^1.6.8",
+    "url-join": "^5.0.0"
+  }
+}
