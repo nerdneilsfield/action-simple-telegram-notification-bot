@@ -33,7 +33,7 @@ function getBaseUrl(): string {
 async function postMessage(text: string): Promise<ReturnData> {
   const url = getBaseUrl() + "/json";
   //   console.log(`the sending url is ${url} and the text is ${text}`)
-  core.debug(`the sending url is ${url} and the text is ${text}`)
+  core.debug(`the sending url is ${url} and the text is ${text}`);
   const data = {
     encrypted: false,
     msg: text,
@@ -44,16 +44,16 @@ async function postMessage(text: string): Promise<ReturnData> {
         "Content-Type": "application/json",
       },
     });
-    core.debug(`Response status: ${response.status}`)
-    core.debug(`Response text: ${response.data}`)
+    core.debug(`Response status: ${response.status}`);
+    core.debug(`Response text: ${response.data}`);
     return {
       status: response.status,
       text: response.data,
     };
   } catch (error) {
     if (error instanceof Error) {
-        core.setFailed(`Error sending message: ${error.message}`);
-        console.error(`Error sending message: ${error.message}`);
+      core.setFailed(`Error sending message: ${error.message}`);
+      console.error(`Error sending message: ${error.message}`);
     }
     process.exit(1);
   }
@@ -82,7 +82,7 @@ async function postFile(filepath: string): Promise<ReturnData> {
     };
   } catch (error) {
     if (error instanceof Error) {
-        core.setFailed(`Error sending file: ${error.message}`);
+      core.setFailed(`Error sending file: ${error.message}`);
     }
     process.exit(1);
   }

@@ -4,11 +4,12 @@
   "description": "A github action for https://github.com/nerdneilsfield/simple-telegram-notification-bot",
   "main": "src/index.ts",
   "scripts": {
-    "build": "ncc build --minify",
+    "build": "ncc build",
     "fmt": "prettier --write \"src/**/*.ts\"",
     "clean": "rm -rf dist/*",
     "fmtcheck": "prettier --check \"src/**/*.ts\"",
     "lint": "eslint --ext .ts src",
+    "precommit": "npm run lint && npm run fmt && npm run build",
     "updatetag": "git tag -d v1 && git push origin :v1 && git tag -a v1 -m '' && git push origin v2"
   },
   "repository": {
