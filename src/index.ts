@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createReadStream, existsSync } from "fs";
 import FormData from "form-data";
-import core from "@actions/core";
+import * as core from "@actions/core";
 import path from "path";
 
 interface ReturnData {

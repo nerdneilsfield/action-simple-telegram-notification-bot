@@ -28431,6 +28431,29 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -28474,18 +28497,18 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 var axios_1 = __importDefault(__nccwpck_require__(8757));
 var fs_1 = __nccwpck_require__(7147);
 var form_data_1 = __importDefault(__nccwpck_require__(4334));
-var core_1 = __importDefault(__nccwpck_require__(2186));
+var core = __importStar(__nccwpck_require__(2186));
 var path_1 = __importDefault(__nccwpck_require__(1017));
 function getBaseUrl() {
     var BOT_URL = process.env.BOT_URL;
     if (BOT_URL === undefined) {
-        core_1.default.setFailed("BOT_URL is not defined");
+        core.setFailed("BOT_URL is not defined");
         console.error("BOT_URL is not defined");
         process.exit(1);
     }
     var BOT_TOKEN = process.env.BOT_TOKEN;
     if (BOT_TOKEN === undefined) {
-        core_1.default.setFailed("BOT_TOKEN is not defined");
+        core.setFailed("BOT_TOKEN is not defined");
         console.error("BOT_TOKEN is not defined");
         process.exit(1);
     }
@@ -28502,7 +28525,7 @@ function postMessage(text) {
                 case 0:
                     url = getBaseUrl() + "/json";
                     //   console.log(`the sending url is ${url} and the text is ${text}`)
-                    core_1.default.debug("the sending url is ".concat(url, " and the text is ").concat(text));
+                    core.debug("the sending url is ".concat(url, " and the text is ").concat(text));
                     data = {
                         encrypted: false,
                         msg: text,
@@ -28517,8 +28540,8 @@ function postMessage(text) {
                         })];
                 case 2:
                     response = _a.sent();
-                    core_1.default.debug("Response status: ".concat(response.status));
-                    core_1.default.debug("Response text: ".concat(response.data));
+                    core.debug("Response status: ".concat(response.status));
+                    core.debug("Response text: ".concat(response.data));
                     return [2 /*return*/, {
                             status: response.status,
                             text: response.data,
@@ -28526,7 +28549,7 @@ function postMessage(text) {
                 case 3:
                     error_1 = _a.sent();
                     if (error_1 instanceof Error) {
-                        core_1.default.setFailed("Error sending message: ".concat(error_1.message));
+                        core.setFailed("Error sending message: ".concat(error_1.message));
                         console.error("Error sending message: ".concat(error_1.message));
                     }
                     process.exit(1);
@@ -28544,7 +28567,7 @@ function postFile(filepath) {
                 case 0:
                     // if filepath not exists
                     if (!(0, fs_1.existsSync)(filepath)) {
-                        core_1.default.setFailed("File does not exist: ".concat(filepath));
+                        core.setFailed("File does not exist: ".concat(filepath));
                     }
                     url = getBaseUrl() + "/file";
                     data = new form_data_1.default();
@@ -28565,7 +28588,7 @@ function postFile(filepath) {
                 case 3:
                     error_2 = _a.sent();
                     if (error_2 instanceof Error) {
-                        core_1.default.setFailed("Error sending file: ".concat(error_2.message));
+                        core.setFailed("Error sending file: ".concat(error_2.message));
                     }
                     process.exit(1);
                     return [3 /*break*/, 4];
@@ -28584,28 +28607,28 @@ function run() {
                     github_sha = process.env.GITHUB_SHA;
                     run_id = process.env.GITHUB_RUN_ID;
                     successMessage = "\n  Build of `".concat(repository, "` successful!\n  Commit: `").concat(github_sha, "`\n  Action: [Action Detail](https://github.com/").concat(repository, "/actions/runs/").concat(run_id, ")\n  ");
-                    if (!(core_1.default.getInput("push_success") === "true")) return [3 /*break*/, 2];
-                    core_1.default.info("Sending success message");
+                    if (!(core.getInput("push_success") === "true")) return [3 /*break*/, 2];
+                    core.info("Sending success message");
                     return [4 /*yield*/, postMessage(successMessage)];
                 case 1:
                     _a.sent();
                     return [3 /*break*/, 3];
                 case 2:
-                    core_1.default.warning("No success message to send");
+                    core.warning("No success message to send");
                     _a.label = 3;
                 case 3:
-                    text = core_1.default.getInput("text");
+                    text = core.getInput("text");
                     if (!(text !== "" && text !== undefined)) return [3 /*break*/, 5];
-                    core_1.default.info("Sending text message");
+                    core.info("Sending text message");
                     return [4 /*yield*/, postMessage(text)];
                 case 4:
                     _a.sent();
                     return [3 /*break*/, 6];
                 case 5:
-                    core_1.default.warning("No text to send");
+                    core.warning("No text to send");
                     _a.label = 6;
                 case 6:
-                    filepaths = core_1.default.getInput("files");
+                    filepaths = core.getInput("files");
                     if (!(filepaths !== "" && filepaths !== undefined)) return [3 /*break*/, 11];
                     files = filepaths.split(",");
                     _i = 0, files_1 = files;
@@ -28615,7 +28638,7 @@ function run() {
                     file = files_1[_i];
                     if (!(file !== "")) return [3 /*break*/, 9];
                     filepath = path_1.default.resolve(file);
-                    core_1.default.info("Sending file: ".concat(filepath));
+                    core.info("Sending file: ".concat(filepath));
                     return [4 /*yield*/, postFile(filepath)];
                 case 8:
                     _a.sent();
@@ -28625,7 +28648,7 @@ function run() {
                     return [3 /*break*/, 7];
                 case 10: return [3 /*break*/, 12];
                 case 11:
-                    core_1.default.warning("No files to send");
+                    core.warning("No files to send");
                     _a.label = 12;
                 case 12: return [2 /*return*/];
             }
