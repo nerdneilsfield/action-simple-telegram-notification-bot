@@ -2,7 +2,6 @@ import axios from "axios";
 import { createReadStream, existsSync } from "fs";
 import FormData from "form-data";
 import core from "@actions/core";
-import github from "@actions/github";
 import path from "path";
 
 interface ReturnData {
@@ -89,10 +88,13 @@ async function postFile(filepath: string): Promise<ReturnData> {
 }
 
 async function run() {
+  const repository = process.env.GITHUB_REPOSITORY;
+  const github_sha = process.env.GITHUB_SHA;
+  const run_id = process.env.GITHUB_RUN_ID;
   const successMessage = `
-  Build of \`${github.context.repo}\` successful!
-  Commit: \`${github.context.sha}\`
-  Action: [Action Detail](https://github.com/${github.context.repo}/actions/runs/${github.context.runId})
+  Build of \`${repository}\` successful!
+  Commit: \`${github_sha}\`
+  Action: [Action Detail](https://github.com/${repository}/actions/runs/${run_id})
   `;
   if (core.getInput("push_success") === "true") {
     core.info("Sending success message");
