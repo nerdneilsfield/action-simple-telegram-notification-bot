@@ -69,6 +69,9 @@ jobs:
       - name: Test Notification Action
         id: test-action
         uses: ./
+        env:
+          BOT_URL: ${{ secrets.BOT_URL }}
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
         with:
           push_success: "true"
           text: |
